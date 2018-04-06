@@ -14,11 +14,11 @@ class Queue {
     }
 
     add(n) {
-        this.queue.push(n);
+        this.queue.unshift(n);
     }
 
     remove() {
-        return this.queue.splice(0, 1)[0];
+        return this.queue.pop();
     }
 }
 
