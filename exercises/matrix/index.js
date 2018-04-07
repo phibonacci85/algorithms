@@ -15,6 +15,61 @@
 //     [11, 16, 15, 6],
 //     [10,  9,  8, 7]]
 
-function matrix(n) {}
+function printMatrix(a) {
+    for(let i = 0; i < a.length; i++) {
+        console.log(a[i]);
+    }
+}
+
+function matrix(n) {
+    let a = [];
+    for(let i = 0; i < n; i++) {
+        let row = [];
+        for(let j = 0; j < n; j++) {
+            row.push(0);
+        }
+        a.push(row);
+    }
+    let r = 0;
+    let c = 0;
+    let move = 1;
+    for(let i = 1; i <= n*n; i++) {
+        a[r][c] = i;
+
+        if(move === 1 && (typeof a[r][c+1] === 'undefined' || a[r][c+1] !== 0)) {
+            move = 2;
+        } else if(move === 2 && (typeof a[r+1] === 'undefined' || a[r+1][c] !== 0)) {
+            move = 3;
+        } else if (move === 3 && (typeof a[r][c-1] === 'undefined' || a[r][c-1] !== 0)) {
+            move = 0;
+        } else if (move === 0 && (typeof a[r-1] === 'undefined' || a[r-1][c] !== 0)) {
+            move = 1;
+        }
+
+        if(move === 0) {
+            r--;
+        } else if (move === 1) {
+            c++;
+        } else if (move === 2) {
+            r++;
+        } else if (move === 3) {
+            c--;
+        }
+
+        /*
+        if(typeof a[r][c+1] !== 'undefined' && a[r][c+1] === 0) {
+            c++;
+        } else if (typeof a[r+1] !== 'undefined' && a[r+1][c] === 0) {
+            r++;
+        } else if (typeof a[r][c-1] !== 'undefined' && a[r][c-1] === 0) {
+            c--;
+        } else if (typeof a[r-1] !== 'undefined' && a[r-1][c] === 0) {
+            r--;
+        }
+        */
+    }
+    return a;
+    // printMatrix(a);
+}
 
 module.exports = matrix;
